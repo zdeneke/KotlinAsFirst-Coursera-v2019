@@ -131,8 +131,6 @@ fun rookOrBishopThreatens(
     (abs(kingX - bishopX) == abs(kingY - bishopY)) && ((kingX == rookX) || (kingY == rookY)) -> 3
     abs(kingX - bishopX) == abs(kingY - bishopY) -> 2
     (kingX == rookX) || (kingY == rookY) -> 1
-
-
     else -> 0
 }
 
