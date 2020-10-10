@@ -122,7 +122,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
     var gipatinuza = a
     var kat1 = b
     var kat2 = c
-  
+
 
     if (gipatinuza < b) {
         gipatinuza = b
