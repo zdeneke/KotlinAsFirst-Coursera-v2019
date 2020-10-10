@@ -1,8 +1,9 @@
-@file:Suppress("UNUSED_PARAMETER")
+@file:Suppress("UNUSED_PARAMETER", "UNREACHABLE_CODE")
 
 package lesson2.task1
 
 import lesson1.task1.discriminant
+import lesson1.task1.sqr
 import kotlin.math.max
 import kotlin.math.sqrt
 
@@ -117,7 +118,36 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+    var gipatinuza = a
+    var kat1 = b
+    var kat2 = c
+  
+
+    if (gipatinuza < b) {
+        gipatinuza = b
+        kat1 = a
+        kat2 = c
+    }
+    if (gipatinuza < c) {
+        gipatinuza = c
+        kat1 = a
+        kat2 = b
+    }
+    if (gipatinuza > (kat1 + kat2))
+        return -1
+    val cosA = (sqr(kat1) + sqr(kat2) - sqr(gipatinuza)) / 2 * kat1 * kat2
+    return when {
+
+        cosA > 0.00 -> 0
+        cosA < 0.00 -> 2
+        else -> 1
+
+
+    }
+
+
+}
 
 /**
  * Средняя
