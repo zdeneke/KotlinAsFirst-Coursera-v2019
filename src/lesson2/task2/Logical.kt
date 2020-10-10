@@ -75,7 +75,14 @@ fun daysInMonth(month: Int, year: Int): Int {
 fun circleInside(
     x1: Double, y1: Double, r1: Double,
     x2: Double, y2: Double, r2: Double
-): Boolean = TODO()
+): Boolean {
+    return when {
+        //sqr(x1 - x2) + sqr(y1 - y2) <= sqr(r2) -> true
+        sqr(x1 + r1 - x2) + sqr(y1 - y2) <= sqr(r2) && (sqr(x1 - r1 - x2) + sqr(y1 - y2) <= sqr(r2)) -> true
+        sqr(x1 - x2) + sqr(y1 + r1 - y2) <= sqr(r2) && (sqr(x1 - x2) + sqr(y1 - r1 - y2) <= sqr(r2)) -> true
+        else -> false
+    }
+}
 
 /**
  * Средняя
@@ -86,4 +93,14 @@ fun circleInside(
  * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
-fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = TODO()
+fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int) {
+//    val d1 = sqrt(((sqr(r) + sqr(s)).toDouble()))
+//    return when {
+//        d1 >= sqrt(((sqr(a) + sqr(b)).toDouble())) -> true
+//        d1 >= sqrt(((sqr(b) + sqr(c)).toDouble())) -> true
+//        d1 >= sqrt(((sqr(a) + sqr(c)).toDouble())) -> true
+//        else -> false
+
+
+}
+
