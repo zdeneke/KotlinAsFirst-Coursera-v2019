@@ -1,8 +1,9 @@
-@file:Suppress("UNUSED_PARAMETER")
+@file:Suppress("UNUSED_PARAMETER", "UNREACHABLE_CODE")
 
 package lesson2.task2
 
 import lesson1.task1.sqr
+import kotlin.math.abs
 
 /**
  * Пример
@@ -28,7 +29,14 @@ fun isNumberHappy(number: Int): Boolean = (number % 10 + number / 10 % 10) == (n
  * Определить, угрожают ли они друг другу. Вернуть true, если угрожают.
  * Считать, что ферзи не могут загораживать друг друга.
  */
-fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
+fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean {
+    return when {
+        x1 == x2 -> true
+        y1 == y2 -> true
+        abs(x1 - x2) == abs(y1 - y2) -> true
+        else -> false
+    }
+}
 
 
 /**
@@ -37,7 +45,25 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
  * Дан номер месяца (от 1 до 12 включительно) и год (положительный).
  * Вернуть число дней в этом месяце этого года по григорианскому календарю.
  */
-fun daysInMonth(month: Int, year: Int): Int = TODO()
+fun daysInMonth(month: Int, year: Int): Int {
+    if (((year % 400) == 0) && (month == 2)) return 29
+    if (((year % 100) == 0) && (month == 2)) return 28
+    if (((year % 4) == 0) && (month == 2)) return 29
+    return when (month) {
+        1 -> 31
+        3 -> 31
+        4 -> 30
+        5 -> 31
+        6 -> 30
+        7 -> 31
+        8 -> 31
+        9 -> 30
+        10 -> 31
+        11 -> 30
+        12 -> 31
+        else -> 28
+    }
+}
 
 /**
  * Средняя
