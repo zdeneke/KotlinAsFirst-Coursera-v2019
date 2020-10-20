@@ -3,7 +3,10 @@
 package lesson3.task1
 
 import lesson1.task1.sqr
+import kotlin.math.abs
+import kotlin.math.pow
 import kotlin.math.sqrt
+import kotlin.math.PI as PI1
 
 /**
  * Пример
@@ -221,7 +224,25 @@ fun collatzSteps(x: Int): Int {
  * Подумайте, как добиться более быстрой сходимости ряда при больших значениях x.
  * Использовать kotlin.math.sin и другие стандартные реализации функции синуса в этой задаче запрещается.
  */
-fun sin(x: Double, eps: Double): Double = TODO()
+fun sin(x: Double, eps: Double): Double {
+
+
+    var x1 = x
+    //while (x1 > 2 * kotlin.math.PI) x1 -= 2 * kotlin.math.PI
+    if (x1 > 2 * kotlin.math.PI) x1 /= (x1 / (2 * kotlin.math.PI)).toInt().toDouble()
+
+    var sinX = x1
+    var n = 1
+    var partN = x1
+    while (abs(partN) > eps) {
+        n += 2
+
+        partN = -partN * x1 * x1 / (n * (n - 1))
+        sinX += partN
+
+    }
+    return sinX
+}
 
 /**
  * Средняя
