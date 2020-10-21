@@ -1,4 +1,4 @@
-@file:Suppress("UNUSED_PARAMETER")
+@file:Suppress("UNUSED_PARAMETER", "UNUSED_CHANGED_VALUE")
 
 package lesson3.task1
 
@@ -330,7 +330,30 @@ fun hasDifferentDigits(n: Int): Boolean {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var count = 0
+    var num = 1
+
+    while (n > count) {
+        var k = 1
+        var sqrNum = sqr(num)
+        //определяем коэфициент k при котором sqrNum % k вернет первое число
+        while (sqrNum / k > 0) {
+            k *= 10
+        }
+        // находим значения числа n
+        while (k != 1) {
+            count++
+            k /= 10
+            if (count == n) return sqrNum / k
+            sqrNum %= k
+
+        }
+
+        num++
+    }
+    return sqr(num)
+}
 
 /**
  * Сложная
@@ -341,4 +364,27 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    var count = 0
+    var num = 1
+
+    while (n > count) {
+        var k = 1
+        var sqrNum = fib(num)
+        //определяем коэфициент k при котором sqrNum % k вернет первое число
+        while (sqrNum / k > 0) {
+            k *= 10
+        }
+        // находим значения числа n
+        while (k != 1) {
+            count++
+            k /= 10
+            if (count == n) return sqrNum / k
+            sqrNum %= k
+
+        }
+
+        num++
+    }
+    return sqr(num)
+}
