@@ -311,14 +311,14 @@ fun isPalindrome(n: Int): Boolean = n == revert(n)
 fun hasDifferentDigits(n: Int): Boolean {
     val nFirst = n % 10
     var k = 10
-    var resault = false
+
     while (n / k > 0) {
         if (nFirst != n / k % 10) {
             return true
         }
         k *= 10
     }
-    return resault
+    return false
 }
 
 /**
