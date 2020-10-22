@@ -122,7 +122,9 @@ fun abs(v: List<Double>): Double = kotlin.math.abs(sqrt(v.map { it * it }.sum())
  *
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
-fun mean(list: List<Double>): Double = TODO()
+fun mean(list: List<Double>): Double = if (list.isEmpty()) 0.0
+else list.sum() / list.size
+
 
 /**
  * Средняя
@@ -132,7 +134,15 @@ fun mean(list: List<Double>): Double = TODO()
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun center(list: MutableList<Double>): MutableList<Double> = TODO()
+fun center(list: MutableList<Double>): MutableList<Double> {
+
+    if (list.isNotEmpty()) {
+        val mean = mean(list.toList())
+        for (n in 0 until list.size)
+            list[n] = list[n] - mean
+    }
+    return list
+}
 
 /**
  * Средняя
@@ -141,7 +151,19 @@ fun center(list: MutableList<Double>): MutableList<Double> = TODO()
  * представленные в виде списков a и b. Скалярное произведение считать по формуле:
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
-fun times(a: List<Int>, b: List<Int>): Int = TODO()
+fun times(a: List<Int>, b: List<Int>): Int {
+
+    if (b.isEmpty() || (a.isEmpty())) return 0
+    else {
+        var sum = 0
+        for (n in 0 until a.size)
+            sum += a[n] * b[n]
+        return sum
+
+
+    }
+
+}
 
 /**
  * Средняя
