@@ -4,6 +4,7 @@ package lesson4.task1
 
 import lesson1.task1.discriminant
 import lesson3.task1.minDivisor
+import kotlin.math.pow
 import kotlin.math.sqrt
 
 /**
@@ -292,7 +293,13 @@ fun convertToString(n: Int, base: Int): String {
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
-fun decimal(digits: List<Int>, base: Int): Int = TODO()
+fun decimal(digits: List<Int>, base: Int): Int {
+    var sumD = 0.0
+    for (i in digits.indices) {
+        sumD += digits.reversed()[i] * base.toDouble().pow(i)
+    }
+    return sumD.toInt()
+}
 
 /**
  * Сложная
@@ -306,7 +313,23 @@ fun decimal(digits: List<Int>, base: Int): Int = TODO()
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, str.toInt(base)), запрещается.
  */
-fun decimalFromString(str: String, base: Int): Int = TODO()
+fun decimalFromString(str: String, base: Int): Int {
+    val list = mutableListOf<Int>()
+    for (i in str) {
+        var count = 10
+        if (i in 'a'..'z') {
+            for (ch in 'a'..'z') {
+
+                if (ch == i) {
+                    list.add(count)
+                    break
+                }
+                count++
+            }
+        } else list.add(i.toString().toInt())
+    }
+    return decimal(list, base)
+}
 
 /**
  * Сложная
