@@ -3,6 +3,7 @@
 package lesson4.task1
 
 import lesson1.task1.discriminant
+import lesson3.task1.minDivisor
 import kotlin.math.sqrt
 
 /**
@@ -213,7 +214,16 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> {
  * Результат разложения вернуть в виде списка множителей, например 75 -> (3, 5, 5).
  * Множители в списке должны располагаться по возрастанию.
  */
-fun factorize(n: Int): List<Int> = TODO()
+fun factorize(n: Int): List<Int> {
+    val list = mutableListOf<Int>()
+    var minNum = n
+    while (list.fold(1, { acc, next -> acc * next }) != n) {
+
+        list.add(minDivisor(minNum))
+        minNum /= minDivisor(minNum)
+    }
+    return list
+}
 
 /**
  * Сложная
