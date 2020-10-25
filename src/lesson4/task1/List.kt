@@ -343,7 +343,7 @@ fun roman(n: Int): String {
     val listRom = listOf<String>("I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M")
     val listNum = listOf<Int>(1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000)
     val div = listNum.findLast { it <= n }!!
-    
+
     if (n == div)
         return listRom[listNum.indexOf(div)]
     return listRom[listNum.indexOf(div)] + roman(n - div)
@@ -356,4 +356,113 @@ fun roman(n: Int): String {
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun russian(n: Int): String {
+    val listSing = listOf<String>(
+        "",
+        "один",
+        "два",
+        "три",
+        "четыре",
+        "пять",
+        "шесть",
+        "семь",
+        "восемь",
+        "девять",
+        "десять",
+        "одиннадцать",
+        "двенадцать",
+        "тринадцать",
+        "четырнадцать",
+        "пятнадцать",
+        "шестнадцать",
+        "семнадцать",
+        "восемнадцать",
+        "девятнадцать",
+        "двадцать",
+        "тридцать",
+        "сорок",
+        "пятьдесят",
+        "шестьдесят",
+        "семьдесят",
+        "восемдесят",
+        "девяносто",
+        "сто",
+        "двести",
+        "триста",
+        "четыреста",
+        "пятьсот",
+        "шестьсот",
+        "семьсот",
+        "восемьсот",
+        "девятьсот",
+        "одна тысяча",
+        "две тысячи",
+        "три тысячи",
+        "четыре тысячи"
+
+    )
+    val listNum = listOf<Int>(
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        2000,
+        3000,
+        4000
+    )
+    val div = listNum.findLast { it <= n }!!
+    val num = n
+
+
+    if (num == div)
+        return listSing[listNum.indexOf(div)]
+    if ((num / 100000 > 0) && ((num % 100000 >= 11000) && (num % 100000 < 20000)))
+        return russian(num / 100000 * 100) + " " + russian(num % 100000)
+
+    if ((num / 10000 > 0) && ((num % 10000 >= 1000) && (num % 10000 < 5000)))
+        return russian(num / 10000 * 10) + " " + russian(num % 10000)
+
+    if (num >= 5000) {
+
+        return russian(num / 1000) + " тысяч " + russian(num % 1000)
+
+    }
+
+
+    return listSing[listNum.indexOf(div)] + " " + russian(num - div)
+
+}
