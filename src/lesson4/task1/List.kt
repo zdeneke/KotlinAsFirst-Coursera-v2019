@@ -339,7 +339,15 @@ fun decimalFromString(str: String, base: Int): Int {
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun roman(n: Int): String = TODO()
+fun roman(n: Int): String {
+    val listRom = listOf<String>("I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M")
+    val listNum = listOf<Int>(1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000)
+    val div = listNum.findLast { it <= n }!!
+    
+    if (n == div)
+        return listRom[listNum.indexOf(div)]
+    return listRom[listNum.indexOf(div)] + roman(n - div)
+}
 
 /**
  * Очень сложная
