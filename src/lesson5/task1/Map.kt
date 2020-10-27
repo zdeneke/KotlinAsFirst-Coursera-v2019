@@ -223,7 +223,7 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
             if (name == stockPrices[a].first) count++
         }
         averageMap[name] = price / count
-        
+
     }
     return averageMap
 }
@@ -273,7 +273,11 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
  * Например:
  *   canBuildFrom(listOf('a', 'b', 'o'), "baobab") -> true
  */
-fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
+fun canBuildFrom(chars: List<Char>, word: String): Boolean {
+    for (i in word)
+        if (i !in chars) return false
+    return true
+}
 
 /**
  * Средняя
