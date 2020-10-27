@@ -136,7 +136,7 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = b == (
  *   subtractOf(a = mutableMapOf("a" to "z"), mapOf("a" to "z"))
  *     -> a changes to mutableMapOf() aka becomes empty
  */
-fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>){
+fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>) {
     val namesToRemove = mutableListOf<String>()
     for ((key, words) in a) {
         if (b.containsKey(key))
@@ -195,9 +195,6 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
 }
 
 
-
-
-
 /**
  * Средняя
  *
@@ -208,7 +205,28 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  *   averageStockPrice(listOf("MSFT" to 100.0, "MSFT" to 200.0, "NFLX" to 40.0))
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
-fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> = TODO()
+fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> {
+    val averageMap = mutableMapOf<String, Double>()
+
+
+    for (a in stockPrices.indices) {
+
+        if (averageMap.containsKey(stockPrices[a].first)) {
+            averageMap[stockPrices[a].first] = averageMap[stockPrices[a].first]!! + stockPrices[a].second
+
+        } else averageMap[stockPrices[a].first] = stockPrices[a].second
+    }
+
+    for ((name, price) in averageMap) {
+        var count = 0
+        for (a in stockPrices.indices) {
+            if (name == stockPrices[a].first) count++
+        }
+        averageMap[name] = price / count
+        
+    }
+    return averageMap
+}
 
 /**
  * Средняя
@@ -225,7 +243,26 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
+    var price = 0.0
+    var nameP: String? = null
+    for ((name, pairOfgood) in stuff) {
+        if (pairOfgood.first == kind) {
+            if ((price > 0) && (price > pairOfgood.second)) {
+                price = pairOfgood.second
+                nameP = name
+            }
+            if (price == 0.0) {
+                price = pairOfgood.second
+                nameP = name
+
+            }
+        }
+
+
+    }
+    return nameP
+}
 
 /**
  * Средняя
