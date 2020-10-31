@@ -345,7 +345,28 @@ fun hasAnagrams(words: List<String>): Boolean {
  *          "Mikhail" to setOf("Sveta", "Marat")
  *        )
  */
-fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<String>> = TODO()
+fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<String>> {
+    val mapFriends = friends.toMutableMap()
+
+    for ((name, nameSet) in friends) {
+        var setOfHendshakes = nameSet.toMutableSet()
+        for (i in nameSet) {
+            if (friends[i].isNullOrEmpty()) {
+                mapFriends[i] = setOf()
+                continue
+            }
+            setOfHendshakes = friends[i]!!.union(setOfHendshakes).toMutableSet()
+            if (i !in setOfHendshakes)
+                setOfHendshakes.add(i)
+
+        }
+        setOfHendshakes.remove(name)
+        mapFriends[name] = setOfHendshakes
+
+
+    }
+    return mapFriends
+}
 
 /**
  * Сложная
@@ -364,7 +385,17 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
+    if (!list.isEmpty()) {
+        val setList = list.toSet().map { number - it }
+        val intersextList = setList.intersect((list.toSet())).filter { it + it != number }.sorted()
+        if (intersextList.size == 2)
+            return Pair(list.indexOf(intersextList[0]), list.indexOf(intersextList[1]))
+    }
+    return Pair(-1, -1)
+
+
+}
 
 /**
  * Очень сложная
@@ -387,4 +418,13 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
  *     450
  *   ) -> emptySet()
  */
-fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = TODO()
+fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
+    val treasuresOk = treasures.filter { it.value.first <= capacity }.toMutableMap()
+    if (treasuresOk.isEmpty()) return emptySet()
+    val maxSummPrice = treasuresOk.maxBy { it.value.first * it.value.second }!!.key
+    val capacityOk = capacity - treasuresOk.maxBy { it.value.first * it.value.second }!!.value.first
+    treasuresOk.remove(maxSummPrice)
+    val resaltCap = setOf(maxSummPrice).union(bagPacking((treasuresOk), capacityOk))
+
+    return resaltCap
+}
