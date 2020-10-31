@@ -192,7 +192,23 @@ fun bestLongJump(jumps: String): Int {
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+fun bestHighJump(jumps: String): Int {
+    for (i in jumps) {
+        if ((i !in '0'..'9') && (i != '-') && (i != '%') && (i != ' ') && (i != '+')) return -1
+    }
+    val goodJumps = mutableListOf<Int>()
+    val jumpsList = jumps.split(" +").toMutableList()
+    for (i in jumpsList.indices) {
+
+        if (i == jumpsList.size - 1) {
+            break
+        }
+        val lastJump = jumpsList[i].split("-", "%", " ").last().toInt()
+        goodJumps.add(lastJump)
+    }
+    if (goodJumps.isEmpty()) return -1
+    return goodJumps.max()!!
+}
 
 /**
  * Сложная
