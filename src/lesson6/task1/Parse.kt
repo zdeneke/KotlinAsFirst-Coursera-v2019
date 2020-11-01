@@ -219,7 +219,32 @@ fun bestHighJump(jumps: String): Int {
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
-fun plusMinus(expression: String): Int = TODO()
+fun plusMinus(expression: String): Int {
+
+
+    //разбиваем строку на отдельные числа без знаков
+    val numberList = expression.split(" + ", " - ").toMutableList()
+    //проверяем фомат строки
+    for (i in numberList.joinToString("")) {
+        if (i !in '0'..'9')
+            throw IllegalArgumentException()
+    }
+
+
+    val numberListMinus = expression.split(" - ").toMutableList()
+    numberListMinus.removeAt(0)
+    if (numberListMinus.isNotEmpty())
+        for (i in 0 until numberListMinus.size) {
+            numberListMinus[i] = numberListMinus[i].split(" + ", " - ").first()
+        }
+    var result = numberList.map { it.toInt() }.sum()
+    for (i in numberListMinus) {
+        result -= i.toInt() * 2
+    }
+    return result
+
+
+}
 
 /**
  * Сложная
