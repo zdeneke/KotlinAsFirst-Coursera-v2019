@@ -288,7 +288,47 @@ fun mostExpensive(description: String): String = TODO()
  *
  * Вернуть -1, если roman не является корректным римским числом
  */
-fun fromRoman(roman: String): Int = TODO()
+fun fromRoman(roman: String): Int {
+    var lenth = roman.length
+    val number = 0
+    var romanWork = ""
+    val romanMap = mutableMapOf<String, Int>(
+        "I" to 1,
+        "IV" to 4,
+        "V" to 5,
+        "IX" to 9,
+        "X" to 10,
+        "XL" to 40,
+        "L" to 50,
+        "XC" to 90,
+        "C" to 100,
+        "CD" to 400,
+        "D" to 500,
+        "CM" to 900,
+        "M" to 1000
+    )
+    if (lenth <= 0) return number
+    else {
+        for ((romNum) in romanMap) {
+            if (roman.take(1) == romNum) {
+                romanWork = romNum
+
+            }
+            if (roman.take(2) == romNum) {
+                romanWork = romNum
+break
+            }
+
+
+        }
+        if (romanWork.isEmpty()) return -1
+
+        lenth -= romanWork.length
+        return fromRoman(roman.removeRange(0, romanWork.length)) + romanMap[romanWork]!!
+    }
+
+
+}
 
 /**
  * Очень сложная
